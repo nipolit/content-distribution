@@ -1,166 +1,218 @@
-asyncapi: 3.0.0
-info:
-  title: ContentDistributionBackend
-  version: 1.0.0
-  description: Requester example that initiates the request/reply pattern on a different channel than the reply is using
-channels:
-  getBriefingMetadataRequest:
-    address: /briefing/command/get
-    messages:
-      getBriefingMetadata:
-        $ref: '#/components/messages/getBriefingMetadata'
-  briefingMetadata:
-    address: /briefing
-    messages:
-      briefingMetadata:
-        $ref: '#/components/messages/briefingMetadataReply'
-  getAssetMetadataRequest:
-    address: /asset/command/get
-    messages:
-      getAssetMetadata:
-        $ref: '#/components/messages/getAssetMetadata'
-  assetMetadata:
-    address: /asset
-    messages:
-      assetMetadata:
-        $ref: '#/components/messages/assetMetadataReply'
-operations:
-  getBriefingMetadataRequest:
-    action: send
-    channel:
-      $ref: '#/channels/getBriefingMetadataRequest'
-    reply:
-      channel:
-        $ref: '#/channels/briefingMetadata'
-  getAssetMetadataRequest:
-    action: send
-    channel:
-      $ref: '#/channels/getAssetMetadataRequest'
-    reply:
-      channel:
-        $ref: '#/channels/assetMetadata'
-components:
-  schemas:
-    BriefingMetadata:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        createdBy:
-          type: string
-        createdDate:
-          type: string
-          format: date
-    AssetMetadata:
-      type: object
-      required:
-        - assetId
-      properties:
-        assetId:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        fileFormat:
-          type: string
-        fileSize:
-          type: string
-        path:
-          type: string
-    AssetDistributionMetadata:
-      type: object
-      required:
-        - assetId
-      properties:
-        assetId:
-          type: string
-        name:
-          type: string
-        fileURL:
-          type: string
-    ContentDistributionMetadata:
-      type: object
-      required:
-        - distributionDate
-        - distributionChannel
-        - distributionMethod
-        - assets
-      properties:
-        distributionDate:
-          type: string
-          format: date
-        distributionChannel:
-          type: string
-          const: Online Store
-        distributionMethod:
-          type: string
-          const: Digital Download
-        assets:
-          type: array
-          items:
-            $ref: '#/components/schemas/AssetDistributionMetadata'
-    AssetOrderMetadata:
-      type: object
-      required:
-        - assetId
-      properties:
-        assetId:
-          type: string
-        quantity:
-          type: integer
-    OrderListMetadata:
-      type: object
-      required:
-        - orderNumber
-        - customerName
-        - orderDate
-        - totalAssets
-        - assets
-      properties:
-        orderNumber:
-          type: string
-        customerName:
-          type: string
-        orderDate:
-          type: string
-          format: date
-        totalAssets:
-          type: integer
-        assets:
-          type: array
-          items:
-            $ref: '#/components/schemas/AssetOrderMetadata'
-  messages:
-    getBriefingMetadata:
-      payload:
-        type: array
-        items:
-          type: object
-          required:
-            - assetId
-          properties:
-            assetId:
-              type: string
-    briefingMetadataReply:
-      payload:
-        type: array
-        items:
-          $ref: '#/components/schemas/BriefingMetadata'
-    getAssetMetadata:
-      payload:
-        type: array
-        items:
-          type: object
-          required:
-            - assetId
-          properties:
-            assetId:
-              type: string
-    assetMetadataReply:
-      payload:
-        type: array
-        items:
-          $ref: '#/components/schemas/AssetMetadata'
+{
+  "asyncapi": "2.6.0",
+  "info": {
+    "title": "ContentDistributionBackend",
+    "version": "1.0.0",
+    "description": "Service providing content distribution metadata for ordered digital assets"
+  },
+  "defaultContentType": "json",
+  "channels": {
+    "/briefing/request": {
+      "publish": {
+        "operationId": "Listen for requests to get BriefingMetadata for assets",
+        "message": {
+          "name": "GetBriefingMetadata",
+          "payload": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [ "assetId" ],
+              "properties": {
+                "assetId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/briefing/reply": {
+      "subscribe": {
+        "operationId": "Publish when the reply with BriefingMetadata for assets is ready",
+        "message": {
+          "name": "BriefingMetadataReply",
+          "payload": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BriefingMetadata"
+            }
+          }
+        }
+      }
+    },
+    "/asset/request": {
+      "publish": {
+        "operationId": "Listen for requests to get AssetMetadata for assets",
+        "message": {
+          "name": "GetAssetMetadata",
+          "payload": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [ "assetId" ],
+              "properties": {
+                "assetId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/asset/reply": {
+      "subscribe": {
+        "operationId": "Publish when the reply with AssetMetadata for assets is ready",
+        "message": {
+          "name": "AssetMetadataReply",
+          "payload": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssetMetadata"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BriefingMetadata": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "AssetMetadata": {
+        "type": "object",
+        "required": [
+          "assetId"
+        ],
+        "properties": {
+          "assetId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "fileFormat": {
+            "type": "string"
+          },
+          "fileSize": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      },
+      "AssetDistributionMetadata": {
+        "type": "object",
+        "required": [
+          "assetId"
+        ],
+        "properties": {
+          "assetId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "fileURL": {
+            "type": "string"
+          }
+        }
+      },
+      "ContentDistributionMetadata": {
+        "type": "object",
+        "required": [
+          "distributionDate",
+          "distributionChannel",
+          "distributionMethod",
+          "assets"
+        ],
+        "properties": {
+          "distributionDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "distributionChannel": {
+            "type": "string",
+            "const": "Online Store"
+          },
+          "distributionMethod": {
+            "type": "string",
+            "const": "Digital Download"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssetDistributionMetadata"
+            }
+          }
+        }
+      },
+      "AssetOrderMetadata": {
+        "type": "object",
+        "required": [
+          "assetId"
+        ],
+        "properties": {
+          "assetId": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer"
+          }
+        }
+      },
+      "OrderListMetadata": {
+        "type": "object",
+        "required": [
+          "orderNumber",
+          "customerName",
+          "orderDate",
+          "totalAssets",
+          "assets"
+        ],
+        "properties": {
+          "orderNumber": {
+            "type": "string"
+          },
+          "customerName": {
+            "type": "string"
+          },
+          "orderDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "totalAssets": {
+            "type": "integer"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssetOrderMetadata"
+            }
+          }
+        }
+      }
+    }
+  }
+}
