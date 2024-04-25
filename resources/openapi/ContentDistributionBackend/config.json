@@ -1,0 +1,5 @@
+{
+  "packageName": "DACM.ContentDistribution",
+  "packageVersion": "0.0.1",
+  "aspnet-core-version": "8.0"
+}

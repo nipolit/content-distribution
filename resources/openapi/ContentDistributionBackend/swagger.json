@@ -1,0 +1,141 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ContentDistributionBackend",
+    "description": "Service providing content distribution metadata for ordered digital assets",
+    "version": "0.0.1"
+  },
+  "paths": {
+    "/orderlist": {
+      "post": {
+        "summary": "Process order list and get the content distribution metadata",
+        "description": "Process order list and get the content distribution metadata",
+        "operationId": "processOrderList",
+        "requestBody": {
+          "description": "Order list metadata",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderListMetadata"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentDistributionMetadata"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "422": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AssetDistributionMetadata": {
+        "type": "object",
+        "required": [
+          "assetId"
+        ],
+        "properties": {
+          "assetId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "fileURL": {
+            "type": "string"
+          }
+        }
+      },
+      "ContentDistributionMetadata": {
+        "type": "object",
+        "required": [
+          "distributionDate",
+          "distributionChannel",
+          "distributionMethod",
+          "assets"
+        ],
+        "properties": {
+          "distributionDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "distributionChannel": {
+            "type": "string",
+            "const": "Online Store"
+          },
+          "distributionMethod": {
+            "type": "string",
+            "const": "Digital Download"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssetDistributionMetadata"
+            }
+          }
+        }
+      },
+      "AssetOrderMetadata": {
+        "type": "object",
+        "required": [
+          "assetId"
+        ],
+        "properties": {
+          "assetId": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer"
+          }
+        }
+      },
+      "OrderListMetadata": {
+        "type": "object",
+        "required": [
+          "orderNumber",
+          "customerName",
+          "orderDate",
+          "totalAssets",
+          "assets"
+        ],
+        "properties": {
+          "orderNumber": {
+            "type": "string"
+          },
+          "customerName": {
+            "type": "string"
+          },
+          "orderDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "totalAssets": {
+            "type": "integer"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssetOrderMetadata"
+            }
+          }
+        }
+      }
+    }
+  }
+}
