@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Description>DACM.BriefingMetadataService</Description>
     <Copyright>DACM.BriefingMetadataService</Copyright>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>DACM.BriefingMetadataService</AssemblyName>

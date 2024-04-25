@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Description>DACM.ContentDistribution</Description>
     <Copyright>DACM.ContentDistribution</Copyright>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>DACM.ContentDistribution</AssemblyName>
