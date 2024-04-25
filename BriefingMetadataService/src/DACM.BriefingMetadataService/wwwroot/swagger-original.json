@@ -1,0 +1,66 @@
+{
+  "openapi" : "3.1.0",
+  "info" : {
+    "title" : "BriefingMetadataService",
+    "description" : "Service providing briefing metadata",
+    "version" : "0.0.1"
+  },
+  "servers" : [ {
+    "url" : "/"
+  } ],
+  "paths" : {
+    "/asset-ids" : {
+      "post" : {
+        "summary" : "Responds with briefing metadata for requested briefing IDs",
+        "description" : "Responds with briefing metadata for requested briefing IDs",
+        "operationId" : "fetchBriefingMetadata",
+        "requestBody" : {
+          "description" : "Briefing IDs",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "items" : { }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/BriefingMetadata"
+                  },
+                  "x-content-type" : "application/json"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid input"
+          },
+          "422" : {
+            "description" : "Validation exception"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "BriefingMetadata" : {
+        "properties" : {
+          "name" : { },
+          "description" : { },
+          "createdBy" : { },
+          "createdDate" : {
+            "format" : "date"
+          }
+        }
+      }
+    }
+  }
+}

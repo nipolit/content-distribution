@@ -1,0 +1,105 @@
+{
+  "openapi" : "3.1.0",
+  "info" : {
+    "title" : "ContentDistributionBackend",
+    "description" : "Service providing content distribution metadata for ordered digital assets",
+    "version" : "0.0.1"
+  },
+  "servers" : [ {
+    "url" : "/"
+  } ],
+  "paths" : {
+    "/orderlist" : {
+      "post" : {
+        "summary" : "Process order list and get the content distribution metadata",
+        "description" : "Process order list and get the content distribution metadata",
+        "operationId" : "processOrderList",
+        "requestBody" : {
+          "description" : "Order list metadata",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/OrderListMetadata"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ContentDistributionMetadata"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid input"
+          },
+          "422" : {
+            "description" : "Validation exception"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "AssetDistributionMetadata" : {
+        "required" : [ "assetId" ],
+        "properties" : {
+          "assetId" : { },
+          "name" : { },
+          "fileURL" : { }
+        }
+      },
+      "ContentDistributionMetadata" : {
+        "required" : [ "assets", "distributionChannel", "distributionDate", "distributionMethod" ],
+        "properties" : {
+          "distributionDate" : {
+            "format" : "date"
+          },
+          "distributionChannel" : { },
+          "distributionMethod" : { },
+          "assets" : {
+            "items" : {
+              "$ref" : "#/components/schemas/AssetDistributionMetadata"
+            }
+          }
+        },
+        "example" : {
+          "distributionMethod" : "",
+          "assets" : "",
+          "distributionDate" : "",
+          "distributionChannel" : ""
+        }
+      },
+      "AssetOrderMetadata" : {
+        "required" : [ "assetId" ],
+        "properties" : {
+          "assetId" : { },
+          "quantity" : { }
+        }
+      },
+      "OrderListMetadata" : {
+        "required" : [ "assets", "customerName", "orderDate", "orderNumber", "totalAssets" ],
+        "properties" : {
+          "orderNumber" : { },
+          "customerName" : { },
+          "orderDate" : {
+            "format" : "date"
+          },
+          "totalAssets" : { },
+          "assets" : {
+            "items" : {
+              "$ref" : "#/components/schemas/AssetOrderMetadata"
+            }
+          }
+        }
+      }
+    }
+  }
+}

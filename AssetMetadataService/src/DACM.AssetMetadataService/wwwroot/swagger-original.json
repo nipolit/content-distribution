@@ -1,0 +1,67 @@
+{
+  "openapi" : "3.1.0",
+  "info" : {
+    "title" : "AssetMetadataService",
+    "description" : "Service providing asset metadata",
+    "version" : "0.0.1"
+  },
+  "servers" : [ {
+    "url" : "/"
+  } ],
+  "paths" : {
+    "/asset-ids" : {
+      "post" : {
+        "summary" : "Responds with asset metadata for requested asset IDs",
+        "description" : "Responds with asset metadata for requested asset IDs",
+        "operationId" : "fetchAssetMetadata",
+        "requestBody" : {
+          "description" : "Asset IDs",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "items" : { }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/AssetMetadata"
+                  },
+                  "x-content-type" : "application/json"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid input"
+          },
+          "422" : {
+            "description" : "Validation exception"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "AssetMetadata" : {
+        "required" : [ "assetId" ],
+        "properties" : {
+          "assetId" : { },
+          "name" : { },
+          "description" : { },
+          "fileFormat" : { },
+          "fileSize" : { },
+          "path" : { }
+        }
+      }
+    }
+  }
+}
