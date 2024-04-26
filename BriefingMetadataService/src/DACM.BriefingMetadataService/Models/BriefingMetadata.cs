@@ -31,28 +31,28 @@ namespace DACM.BriefingMetadataService.Models
         /// </summary>
 
         [DataMember(Name="name")]
-        public Object Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
 
         [DataMember(Name="description")]
-        public Object Description { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedBy
         /// </summary>
 
         [DataMember(Name="createdBy")]
-        public Object CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedDate
         /// </summary>
 
         [DataMember(Name="createdDate")]
-        public Object CreatedDate { get; set; }
+        public string CreatedDate { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
