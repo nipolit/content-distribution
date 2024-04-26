@@ -8,11 +8,11 @@
   "paths": {
     "/asset-ids": {
       "post": {
-        "summary": "Responds with briefing metadata for requested briefing IDs",
-        "description": "Responds with briefing metadata for requested briefing IDs",
+        "summary": "Responds with briefing metadata for requested asset IDs",
+        "description": "Responds with briefing metadata for requested asset IDs",
         "operationId": "fetchBriefingMetadata",
         "requestBody": {
-          "description": "Briefing IDs",
+          "description": "Asset IDs",
           "content": {
             "application/json": {
               "schema": {
