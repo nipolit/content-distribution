@@ -13,7 +13,7 @@ public class AssetMetadataService
 
     public AssetMetadataService()
     {
-        const string filePath = "../../../resources/Metadata/AssetMetadata.json";
+        const string filePath = "/app/resources/Metadata/AssetMetadata.json";
 
         // Deserialize the list from the file
         using var file = File.OpenText(filePath);

@@ -2,24 +2,9 @@
 
 Service providing asset metadata
 
-## Run
-
-Linux/OS X:
-
-```
-sh build.sh
-```
-
-Windows:
-
-```
-build.bat
-```
-
 ## Run in Docker
 
 ```
-cd src/DACM.AssetMetadataService
-docker build -t dacm.assetmetadataservice .
+docker build -t dacm.assetmetadataservice -f AssetMetadataService/src/DACM.AssetMetadataService/Dockerfile .
 docker run -p 5000:5000 dacm.assetmetadataservice
 ```
