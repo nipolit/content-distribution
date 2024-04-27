@@ -12,8 +12,8 @@ namespace DACM.ContentDistribution.Services;
 
 public class RestContentDistributionMetadataService : IContentDistributionMetadataService
 {
-    private const string AssetMetadataServiceUrl = "http://asset-metadata";
-    private const string BriefingMetadataServiceUrl = "http://briefing-metadata";
+    private const string AssetMetadataServiceUrl = "http://asset-metadata:5000";
+    private const string BriefingMetadataServiceUrl = "http://briefing-metadata:5000";
     private const string CdnUrL = "https://example.com";
     private readonly HttpClient _httpClient = new();
 

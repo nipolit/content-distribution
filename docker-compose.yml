@@ -16,3 +16,8 @@
     build:
       context: .
       dockerfile: ContentDistributionBackend/src/DACM.ContentDistribution/Dockerfile
+    ports:
+      - 5000:5000
+    depends_on:
+      - asset-metadata
+      - briefing-metadata

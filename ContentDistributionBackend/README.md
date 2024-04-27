@@ -19,7 +19,6 @@ build.bat
 ## Run in Docker
 
 ```
-cd src/DACM.ContentDistribution
-docker build -t dacm.contentdistribution .
+docker build -t dacm.contentdistribution -f ContentDistributionBackend/src/DACM.ContentDistribution/Dockerfile .
 docker run -p 5000:5000 dacm.contentdistribution
 ```
