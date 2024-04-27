@@ -2,20 +2,6 @@
 
 Service providing briefing metadata
 
-## Run
-
-Linux/OS X:
-
-```
-sh build.sh
-```
-
-Windows:
-
-```
-build.bat
-```
-
 ## Run in Docker
 
 ```

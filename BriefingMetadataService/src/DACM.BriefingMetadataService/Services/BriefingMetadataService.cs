@@ -13,7 +13,7 @@ public class BriefingMetadataService
 
     public BriefingMetadataService()
     {
-        const string filePath = "../../../resources/Metadata/BriefingMetadata.json";
+        const string filePath = "/app/resources/Metadata/BriefingMetadata.json";
 
         // Deserialize the list from the file
         using var file = File.OpenText(filePath);
