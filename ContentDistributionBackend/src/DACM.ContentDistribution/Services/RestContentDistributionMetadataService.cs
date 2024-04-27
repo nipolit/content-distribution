@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using DACM.ContentDistribution.Models;
 using Newtonsoft.Json;
@@ -16,6 +17,11 @@ public class RestContentDistributionMetadataService : IContentDistributionMetada
     private const string BriefingMetadataServiceUrl = "http://briefing-metadata:5000";
     private const string CdnUrL = "https://example.com";
     private readonly HttpClient _httpClient = new();
+
+    public RestContentDistributionMetadataService()
+    {
+        _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+    }
 
     public async Task<ContentDistributionMetadata> ProcessOrder(OrderListMetadata orderListMetadata)
     {
@@ -32,7 +38,7 @@ public class RestContentDistributionMetadataService : IContentDistributionMetada
             Assets = distributionMetadataForAssetIds
         };
     }
-    
+
     public async Task<IList<AssetDistributionMetadata>> FetchAssetDistributionMetadata(IList<string> assetIds)
     {
         var assetMetadataDictionary = await FetchAssetMetadata(assetIds);
@@ -65,7 +71,8 @@ public class RestContentDistributionMetadataService : IContentDistributionMetada
     {
         var assetIdsJson = JsonConvert.SerializeObject(assetIds);
         const string endpointUrl = AssetMetadataServiceUrl + "/asset-ids";
-        using var response = await _httpClient.PostAsync(endpointUrl, new StringContent(assetIdsJson));
+        using var response = await _httpClient.PostAsync(endpointUrl,
+            new StringContent(assetIdsJson, Encoding.UTF8, "application/json")).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
         var responseBody = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<IList<AssetMetadata>>(responseBody)!;
@@ -92,7 +99,8 @@ public class RestContentDistributionMetadataService : IContentDistributionMetada
     {
         var assetIdsJson = JsonConvert.SerializeObject(assetIds);
         const string endpointUrl = BriefingMetadataServiceUrl + "/asset-ids";
-        using var response = await _httpClient.PostAsync(endpointUrl, new StringContent(assetIdsJson));
+        using var response = await _httpClient.PostAsync(endpointUrl,
+            new StringContent(assetIdsJson, Encoding.UTF8, "application/json")).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
         var responseBody = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<IList<BriefingMetadata>>(responseBody)!;
