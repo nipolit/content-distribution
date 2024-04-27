@@ -19,7 +19,6 @@ build.bat
 ## Run in Docker
 
 ```
-cd src/DACM.BriefingMetadataService
-docker build -t dacm.briefingmetadataservice .
+docker build -t dacm.briefingmetadataservice -f BriefingMetadataService/src/DACM.BriefingMetadataService/Dockerfile .
 docker run -p 5000:5000 dacm.briefingmetadataservice
 ```
