@@ -64,7 +64,7 @@ namespace DACM.ContentDistribution.Models
         [Required]
 
         [DataMember(Name="assets")]
-        public Object Assets { get; set; }
+        public IList<AssetOrderMetadata> Assets { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

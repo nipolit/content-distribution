@@ -1,7 +1,7 @@
 /*
- * ContentDistributionBackend
+ * BriefingMetadataService
  *
- * Service providing content distribution metadata for ordered digital assets
+ * Service providing briefing metadata
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -24,16 +24,8 @@ namespace DACM.ContentDistribution.Models
     /// 
     /// </summary>
     [DataContract]
-    public partial class AssetDistributionMetadata : IEquatable<AssetDistributionMetadata>
+    public partial class BriefingMetadata : IEquatable<BriefingMetadata>
     { 
-        /// <summary>
-        /// Gets or Sets AssetId
-        /// </summary>
-        [Required]
-
-        [DataMember(Name="assetId")]
-        public string AssetId { get; set; }
-
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
@@ -42,11 +34,25 @@ namespace DACM.ContentDistribution.Models
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets FileURL
+        /// Gets or Sets Description
         /// </summary>
 
-        [DataMember(Name="fileURL")]
-        public string FileURL { get; set; }
+        [DataMember(Name="description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Gets or Sets CreatedBy
+        /// </summary>
+
+        [DataMember(Name="createdBy")]
+        public string CreatedBy { get; set; }
+
+        /// <summary>
+        /// Gets or Sets CreatedDate
+        /// </summary>
+
+        [DataMember(Name="createdDate")]
+        public string CreatedDate { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -55,10 +61,11 @@ namespace DACM.ContentDistribution.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class AssetDistributionMetadata {\n");
-            sb.Append("  AssetId: ").Append(AssetId).Append("\n");
+            sb.Append("class BriefingMetadata {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  FileURL: ").Append(FileURL).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  CreatedBy: ").Append(CreatedBy).Append("\n");
+            sb.Append("  CreatedDate: ").Append(CreatedDate).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -81,34 +88,39 @@ namespace DACM.ContentDistribution.Models
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((AssetDistributionMetadata)obj);
+            return obj.GetType() == GetType() && Equals((BriefingMetadata)obj);
         }
 
         /// <summary>
-        /// Returns true if AssetDistributionMetadata instances are equal
+        /// Returns true if BriefingMetadata instances are equal
         /// </summary>
-        /// <param name="other">Instance of AssetDistributionMetadata to be compared</param>
+        /// <param name="other">Instance of BriefingMetadata to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(AssetDistributionMetadata other)
+        public bool Equals(BriefingMetadata other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
 
             return 
                 (
-                    AssetId == other.AssetId ||
-                    AssetId != null &&
-                    AssetId.Equals(other.AssetId)
-                ) && 
-                (
                     Name == other.Name ||
                     Name != null &&
                     Name.Equals(other.Name)
                 ) && 
                 (
-                    FileURL == other.FileURL ||
-                    FileURL != null &&
-                    FileURL.Equals(other.FileURL)
+                    Description == other.Description ||
+                    Description != null &&
+                    Description.Equals(other.Description)
+                ) && 
+                (
+                    CreatedBy == other.CreatedBy ||
+                    CreatedBy != null &&
+                    CreatedBy.Equals(other.CreatedBy)
+                ) && 
+                (
+                    CreatedDate == other.CreatedDate ||
+                    CreatedDate != null &&
+                    CreatedDate.Equals(other.CreatedDate)
                 );
         }
 
@@ -122,12 +134,14 @@ namespace DACM.ContentDistribution.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (AssetId != null)
-                    hashCode = hashCode * 59 + AssetId.GetHashCode();
                     if (Name != null)
                     hashCode = hashCode * 59 + Name.GetHashCode();
-                    if (FileURL != null)
-                    hashCode = hashCode * 59 + FileURL.GetHashCode();
+                    if (Description != null)
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                    if (CreatedBy != null)
+                    hashCode = hashCode * 59 + CreatedBy.GetHashCode();
+                    if (CreatedDate != null)
+                    hashCode = hashCode * 59 + CreatedDate.GetHashCode();
                 return hashCode;
             }
         }
@@ -135,12 +149,12 @@ namespace DACM.ContentDistribution.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(AssetDistributionMetadata left, AssetDistributionMetadata right)
+        public static bool operator ==(BriefingMetadata left, BriefingMetadata right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(AssetDistributionMetadata left, AssetDistributionMetadata right)
+        public static bool operator !=(BriefingMetadata left, BriefingMetadata right)
         {
             return !Equals(left, right);
         }

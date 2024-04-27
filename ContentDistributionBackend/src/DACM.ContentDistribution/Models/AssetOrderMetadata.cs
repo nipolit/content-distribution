@@ -32,14 +32,14 @@ namespace DACM.ContentDistribution.Models
         [Required]
 
         [DataMember(Name="assetId")]
-        public Object AssetId { get; set; }
+        public string AssetId { get; set; }
 
         /// <summary>
         /// Gets or Sets Quantity
         /// </summary>
 
         [DataMember(Name="quantity")]
-        public Object Quantity { get; set; }
+        public int Quantity { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
