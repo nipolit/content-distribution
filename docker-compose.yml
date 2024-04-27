@@ -21,3 +21,7 @@
     depends_on:
       - asset-metadata
       - briefing-metadata
+      - redis
+
+  redis:
+    image: redis

@@ -9,7 +9,7 @@ namespace DACM.ContentDistribution.Services;
 public class ContentDistributionMetadataService
 {
     private readonly IAssetDistributionMetadataService _assetDistributionMetadataService =
-        new RestAssetDistributionMetadataService();
+        new CachingAssetDistributionMetadataService();
 
     public async Task<ContentDistributionMetadata> ProcessOrder(OrderListMetadata orderListMetadata)
     {
