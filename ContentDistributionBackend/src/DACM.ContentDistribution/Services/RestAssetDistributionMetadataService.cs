@@ -1,7 +1,5 @@
 #nullable enable
-using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -11,32 +9,16 @@ using Newtonsoft.Json;
 
 namespace DACM.ContentDistribution.Services;
 
-public class RestContentDistributionMetadataService : IContentDistributionMetadataService
+public class RestAssetDistributionMetadataService : IAssetDistributionMetadataService
 {
     private const string AssetMetadataServiceUrl = "http://asset-metadata:5000";
     private const string BriefingMetadataServiceUrl = "http://briefing-metadata:5000";
     private const string CdnUrL = "https://example.com";
     private readonly HttpClient _httpClient = new();
 
-    public RestContentDistributionMetadataService()
+    public RestAssetDistributionMetadataService()
     {
         _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
-    }
-
-    public async Task<ContentDistributionMetadata> ProcessOrder(OrderListMetadata orderListMetadata)
-    {
-        var assetIds = orderListMetadata.Assets!.Select(assetOrderMetadata => assetOrderMetadata.AssetId).ToList();
-        var distributionMetadataForAssetIds = await FetchAssetDistributionMetadata(assetIds);
-        var isoDateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat.UniversalSortableDateTimePattern;
-        var isoDate = DateTime.Today.ToString(isoDateTimeFormat)[..10];
-
-        return new ContentDistributionMetadata
-        {
-            DistributionDate = isoDate,
-            DistributionChannel = "Online Store",
-            DistributionMethod = "Digital Download",
-            Assets = distributionMetadataForAssetIds
-        };
     }
 
     public async Task<IList<AssetDistributionMetadata>> FetchAssetDistributionMetadata(IList<string> assetIds)

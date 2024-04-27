@@ -23,8 +23,7 @@ namespace DACM.ContentDistribution.Controllers
     [ApiController]
     public class DefaultApiController : ControllerBase
     {
-        private readonly IContentDistributionMetadataService _contentDistributionMetadataService =
-            new RestContentDistributionMetadataService();
+        private readonly ContentDistributionMetadataService _contentDistributionMetadataService = new();
         
         /// <summary>
         /// Process order list and get the content distribution metadata

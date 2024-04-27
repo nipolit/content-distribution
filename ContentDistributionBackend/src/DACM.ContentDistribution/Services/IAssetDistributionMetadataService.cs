@@ -4,8 +4,7 @@ using DACM.ContentDistribution.Models;
 
 namespace DACM.ContentDistribution.Services;
 
-public interface IContentDistributionMetadataService
+public interface IAssetDistributionMetadataService
 {
-    Task<ContentDistributionMetadata> ProcessOrder(OrderListMetadata orderListMetadata);
     Task<IList<AssetDistributionMetadata>> FetchAssetDistributionMetadata(IList<string> assetIds);
 }
