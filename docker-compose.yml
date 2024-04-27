@@ -1,6 +1,18 @@
 ﻿services:
-  contentdistributionbackend:
-    image: contentdistributionbackend
+  asset-metadata:
+    image: dacm.assetmetadataservice
     build:
       context: .
-      dockerfile: ContentDistributionBackend/Dockerfile
+      dockerfile: AssetMetadataService/src/DACM.AssetMetadataService/Dockerfile
+      
+  briefing-metadata:
+    image: dacm.briefingmetadataservice
+    build:
+      context: .
+      dockerfile: BriefingMetadataService/src/DACM.BriefingMetadataService/Dockerfile
+    
+  content-distribution-backend:
+    image: dacm.contentdistributionbackend
+    build:
+      context: .
+      dockerfile: ContentDistributionBackend/src/DACM.ContentDistribution/Dockerfile
