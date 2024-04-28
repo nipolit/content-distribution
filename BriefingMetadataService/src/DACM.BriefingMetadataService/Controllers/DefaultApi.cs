@@ -42,7 +42,8 @@ namespace DACM.BriefingMetadataService.Controllers
         [SwaggerOperation("FetchBriefingMetadata")]
         [SwaggerResponse(statusCode: 200, type: typeof(IList<BriefingMetadata>), description: "Successful operation")]
         public virtual IActionResult FetchBriefingMetadata(IList<string> assetIds)
-        { 
+        {
+            System.Threading.Thread.Sleep(200); // Slow down the API request
             var assetMetadataList = _briefingMetadataService.FetchBriefingMetadata(assetIds);
             return new OkObjectResult(assetMetadataList);
         }

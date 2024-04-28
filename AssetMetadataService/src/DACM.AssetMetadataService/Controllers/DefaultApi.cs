@@ -43,6 +43,7 @@ namespace DACM.AssetMetadataService.Controllers
         [SwaggerResponse(statusCode: 200, type: typeof(IList<AssetMetadata>), description: "Successful operation")]
         public IActionResult FetchAssetMetadata(IList<string> assetIds)
         {
+            System.Threading.Thread.Sleep(200); // Slow down the API request
             var assetMetadataList = _assetMetadataService.FetchAssetMetadata(assetIds);
             return new OkObjectResult(assetMetadataList);
         }
