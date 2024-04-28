@@ -20,7 +20,7 @@ curl http://localhost:5000/orderlist --json '{"orderNumber": "ORD123456789","cus
 ## Software diagrams
 Software diagrams are using the C4 model approach.
 The architecture was defined using a Structurizr DSL, see file [structurizr.dsl](structurizr.dsl).
-Then the views showing the system on different levels were exported as a mermaid code and included below.
+Then the views showing the system on different levels were exported as mermaid code and included below.
 
 ### System Context Diagram
 
