@@ -3,7 +3,7 @@
 ## Build and run
 
 ```shell
-docker-compose up
+docker-compose up && docker-compose rm -fsv
 ```
 
 Example request:
