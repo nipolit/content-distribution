@@ -18,7 +18,8 @@ WORKDIR /app
 COPY --from=build-env /app/out .
 ADD resources/Metadata/BriefingMetadata.json /app/resources/Metadata/BriefingMetadata.json
 
-ENV ASPNETCORE_URLS http://*:5000
+ENV ASPNETCORE_URLS http://+:5000
+ENV DOTNET_URLS=http://+:5000
 EXPOSE 5000
 
 ENTRYPOINT ["dotnet", "DACM.BriefingMetadataService.dll"]
