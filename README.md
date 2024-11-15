@@ -1,20 +1,26 @@
 # content-distribution
 
+## Prerequisites
+
+1. Install minikube
+2. Run `minikube addons enable ingress` [source](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/)
+3. Run `minikube tunnel`
+
 ## Build and run
 
-Linux:
+Start:
 ```shell
-docker-compose up && docker-compose rm -fsv
+./scripts/start.sh
 ```
 
-MacOS:
+Stop:
 ```shell
-docker-compose up || docker-compose rm -fsv
+./scripts/stop.sh
 ```
 
 Example request:
 ```shell
-curl http://localhost:5000/orderlist --json '{"orderNumber": "ORD123456789","customerName": "John Doe","orderDate": "2023-07-13","totalAssets": 10,"assets": [{"assetId": "ASSET001","quantity": 2},{"assetId": "ASSET002","quantity": 1},{"assetId": "ASSET003","quantity": 3},{"assetId": "ASSET004","quantity": 1},{"assetId": "ASSET005","quantity": 2},{"assetId": "ASSET006","quantity": 1},{"assetId": "ASSET007","quantity": 1},{"assetId": "ASSET008","quantity": 1},{"assetId": "ASSET009","quantity": 1},{"assetId": "ASSET010","quantity": 2}]}'
+curl --resolve "content-distribution-backend.example:80:127.0.0.1" -i "http://content-distribution-backend.example/orderlist" --json '{"orderNumber": "ORD123456789","customerName": "John Doe","orderDate": "2023-07-13","totalAssets": 10,"assets": [{"assetId": "ASSET001","quantity": 2},{"assetId": "ASSET002","quantity": 1},{"assetId": "ASSET003","quantity": 3},{"assetId": "ASSET004","quantity": 1},{"assetId": "ASSET005","quantity": 2},{"assetId": "ASSET006","quantity": 1},{"assetId": "ASSET007","quantity": 1},{"assetId": "ASSET008","quantity": 1},{"assetId": "ASSET009","quantity": 1},{"assetId": "ASSET010","quantity": 2}]}'
 ```
 
 ## Software diagrams
