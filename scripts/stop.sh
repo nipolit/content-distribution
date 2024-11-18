@@ -1,3 +1,3 @@
 #!/bin/bash
 
-kubectl delete -f cluster_config
+kubectl delete namespace content-distribution

@@ -35,4 +35,5 @@ for dockerImageNameAndDockerfile in "${dockerImageNameAndDockerfiles[@]}"; do
     minikube image load "$dockerImageName:latest" --overwrite=false
 done
 
-kubectl apply -f cluster_config
+kubectl apply -f cluster_config/content-distribution-namespace.yaml
+kubectl apply -f cluster_config --namespace=content-distribution
