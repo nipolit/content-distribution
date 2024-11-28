@@ -1,0 +1,50 @@
+resource "kubernetes_manifest" "deployment_redis" {
+  manifest = {
+    "apiVersion" = "apps/v1"
+    "kind" = "Deployment"
+    "metadata" = {
+      "annotations" = {
+        "kompose.cmd" = "kompose convert"
+        "kompose.version" = "1.34.0 (HEAD)"
+      }
+      "labels" = {
+        "io.kompose.service" = "redis"
+      }
+      "name" = "redis"
+    }
+    "spec" = {
+      "replicas" = 1
+      "selector" = {
+        "matchLabels" = {
+          "io.kompose.service" = "redis"
+        }
+      }
+      "template" = {
+        "metadata" = {
+          "annotations" = {
+            "kompose.cmd" = "kompose convert"
+            "kompose.version" = "1.34.0 (HEAD)"
+          }
+          "labels" = {
+            "io.kompose.service" = "redis"
+          }
+        }
+        "spec" = {
+          "containers" = [
+            {
+              "image" = "redis"
+              "name" = "redis"
+              "ports" = [
+                {
+                  "containerPort" = 6379
+                  "protocol" = "TCP"
+                },
+              ]
+            },
+          ]
+          "restartPolicy" = "Always"
+        }
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@
 1. Install minikube
 2. Run `minikube addons enable ingress` [source](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/)
 3. Run `minikube tunnel`
+4. Install terraform
 
 ## Build and run
 
