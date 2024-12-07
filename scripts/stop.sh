@@ -1,3 +1,5 @@
 #!/bin/bash
 
-kubectl delete namespace content-distribution
+cd cluster_config_tf
+terraform init
+terraform destroy
