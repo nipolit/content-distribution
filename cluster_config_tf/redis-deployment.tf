@@ -11,6 +11,7 @@ resource "kubernetes_manifest" "deployment_redis" {
         "io.kompose.service" = "redis"
       }
       "name" = "redis"
+      "namespace" = "content-distribution"
     }
     "spec" = {
       "replicas" = 1

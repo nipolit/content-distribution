@@ -11,6 +11,7 @@ resource "kubernetes_manifest" "deployment_briefing_metadata" {
         "io.kompose.service" = "briefing-metadata"
       }
       "name" = "briefing-metadata"
+      "namespace" = "content-distribution"
     }
     "spec" = {
       "replicas" = 1

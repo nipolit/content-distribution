@@ -11,6 +11,7 @@ resource "kubernetes_manifest" "deployment_asset_metadata" {
         "io.kompose.service" = "asset-metadata"
       }
       "name" = "asset-metadata"
+      "namespace" = "content-distribution"
     }
     "spec" = {
       "replicas" = 1

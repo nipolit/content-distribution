@@ -12,6 +12,7 @@ resource "kubernetes_manifest" "ingress_content_distribution_backend" {
         "io.kompose.service" = "content-distribution-backend"
       }
       "name" = "content-distribution-backend"
+      "namespace" = "content-distribution"
     }
     "spec" = {
       "rules" = [
