@@ -38,4 +38,5 @@ resource "kubernetes_manifest" "ingress_content_distribution_backend" {
       ]
     }
   }
+  depends_on = [kubernetes_manifest.namespace_content_distribution]
 }

@@ -26,4 +26,5 @@ resource "kubernetes_manifest" "service_redis" {
       }
     }
   }
+  depends_on = [kubernetes_manifest.namespace_content_distribution]
 }

@@ -49,4 +49,5 @@ resource "kubernetes_manifest" "deployment_asset_metadata" {
       }
     }
   }
+  depends_on = [kubernetes_manifest.namespace_content_distribution]
 }

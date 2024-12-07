@@ -26,4 +26,5 @@ resource "kubernetes_manifest" "service_briefing_metadata" {
       }
     }
   }
+  depends_on = [kubernetes_manifest.namespace_content_distribution]
 }

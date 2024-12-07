@@ -27,4 +27,5 @@ resource "kubernetes_manifest" "service_content_distribution_backend" {
       }
     }
   }
+  depends_on = [kubernetes_manifest.namespace_content_distribution]
 }
